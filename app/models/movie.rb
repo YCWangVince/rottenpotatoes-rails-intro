@@ -10,6 +10,6 @@ class Movie < ActiveRecord::Base
     #     if rating_list.nil? 
     #         return self.all
     #     end
-    #     self.where("params[:rating] IN rating_list")
+    #     where('upper(rating) IN (?)', ratings_list)
     # end
 end

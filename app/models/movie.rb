@@ -6,10 +6,10 @@ class Movie < ActiveRecord::Base
     end
         
     
-    def self.with_ratings(rating_list)
-        if rating_list.nil? 
-            return self.all
-        end
-        self.where("params[:rating] IN rating_list")
-    end
+    # def self.with_ratings(rating_list)
+    #     if rating_list.nil? 
+    #         return self.all
+    #     end
+    #     self.where("params[:rating] IN rating_list")
+    # end
 end

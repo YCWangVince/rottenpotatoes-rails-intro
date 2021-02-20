@@ -6,10 +6,10 @@ class Movie < ActiveRecord::Base
     end
         
     
-    # def self.with_ratings(rating_list)
-    #     if rating_list.nil? 
-    #         return self.all
-    #     end
-    #     where('upper(rating) IN (?)', ratings_list)
-    # end
+    def self.with_ratings(ratings_list)
+        if ratings_list.nil? or ratings_list.empty?
+          return self.all
+        end
+        where('upper(rating) IN (?)', ratings_list)
+    end
 end

@@ -10,6 +10,6 @@ class Movie < ActiveRecord::Base
         if ratings_list.nil? or ratings_list.empty?
           return self.all
         end
-        where('upper(rating) IN (?)', ratings_list)
+        where({rating: ratings_list})
     end
 end

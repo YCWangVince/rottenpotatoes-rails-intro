@@ -9,9 +9,13 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
-    @ratings_to_show = params[:ratings].nil? ? [] : params[:ratings].keys
+    
+    session[:ratings] = params[:ratings].nil? ? nil : params[:ratings] 
+    session[:sort] = params[:sort].nil? ? nil : params[:sort]
+    
+    @ratings_to_show = session[:ratings].nil? ? [] : session[:ratings].keys
     @ratings_to_show_hash = Hash[@ratings_to_show.collect {|x| [x, '1']}]
-    @sorting = params[:sort]
+    @sorting = session[:sort]
     if @sorting.nil? 
       @movies = Movie.with_ratings(@ratings_to_show)
     else
@@ -34,6 +38,7 @@ class MoviesController < ApplicationController
   end
 
   def update
+    session.clear
     @movie = Movie.find params[:id]
     @movie.update_attributes!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully updated."

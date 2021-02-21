@@ -21,7 +21,16 @@ class MoviesController < ApplicationController
     end 
     
     @ratings_to_show_hash = Hash[@ratings_to_show.collect {|x| [x, '1']}]
-    @sorting = params[:sort]
+    
+    if session[:sort].nil?
+      @sorting = params[:sort] 
+      session[:sort] = params[:sort]
+    elsif params[:commit].nil?
+      @sorting = session[:sort]
+    else
+      @sorting = params[:sort]
+      session[:sort] = params[:sort]
+    end 
     
     if @sorting.nil? 
       @movies = Movie.with_ratings(@ratings_to_show)
@@ -35,6 +44,7 @@ class MoviesController < ApplicationController
   end
 
   def create
+    session.clear
     @movie = Movie.create!(movie_params)
     flash[:notice] = "#{@movie.title} was successfully created."
     redirect_to movies_path
@@ -53,6 +63,7 @@ class MoviesController < ApplicationController
   end
 
   def destroy
+    session.clear
     @movie = Movie.find(params[:id])
     @movie.destroy
     flash[:notice] = "Movie '#{@movie.title}' deleted."

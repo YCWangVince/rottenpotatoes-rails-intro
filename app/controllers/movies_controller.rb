@@ -25,7 +25,7 @@ class MoviesController < ApplicationController
     if session[:sort].nil?
       @sorting = params[:sort] 
       session[:sort] = params[:sort]
-    elsif (params[:sort]!=session[:sort] and params[:sort].nil?)
+    elsif (params[:sort]!=session[:sort] and !params[:sort].nil?)
       @sorting = params[:sort]
       session[:sort] = params[:sort]
     else

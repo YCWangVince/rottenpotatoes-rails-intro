@@ -10,21 +10,22 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     
-    if (params[:ratings].nil? and params[:sort].nil?)
-      
-    else
-      session[:ratings] = params[:ratings]
-      session[:sort] = params[:sort].nil? ? session[:sort] : params[:sort]
-    end
-    
+    @ratings_to_show = params[:ratings].nil? ? [] : params[:ratings].keys
     @ratings_to_show_hash = Hash[@ratings_to_show.collect {|x| [x, '1']}]
+    @sorting = params[:sort]
     
-    @sorting = session[:sort]
-   
     if @sorting.nil? 
       @movies = Movie.with_ratings(@ratings_to_show)
     else
       @movies = Movie.order(@sorting).with_ratings(@ratings_to_show)
+    end
+    if params.key? :ratings
+      session[:ratings] = params[:ratings]
+      # @movies = @movies.select { |movie| params['ratings'].key? movie.rating}
+    end
+    
+    if session.key? :ratings
+      @movies =  Movie.order(@sorting).with_ratings(@ratings_to_show)
     end
     
   end

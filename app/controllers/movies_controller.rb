@@ -32,6 +32,10 @@ class MoviesController < ApplicationController
       @sorting = session[:sort]
     end 
     
+    if !params[:commit].nil?
+      @sorting = nil
+    end
+    
     if @sorting.nil? 
       @movies = Movie.with_ratings(@ratings_to_show)
     else

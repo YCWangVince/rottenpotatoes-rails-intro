@@ -10,8 +10,8 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     
-    session[:ratings] = params[:ratings].nil? ? nil : params[:ratings] 
-    session[:sort] = params[:sort].nil? ? nil : params[:sort]
+    session[:ratings] = params[:ratings] 
+    session[:sort] = params[:sort]
     
     @ratings_to_show = session[:ratings].nil? ? [] : session[:ratings].keys
     @ratings_to_show_hash = Hash[@ratings_to_show.collect {|x| [x, '1']}]

@@ -19,9 +19,7 @@ class MoviesController < ApplicationController
     else
       @movies = Movie.order(@sorting).with_ratings(@ratings_to_show)
     end
-    
   
-    
   end
 
   def new

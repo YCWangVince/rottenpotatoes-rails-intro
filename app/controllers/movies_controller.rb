@@ -9,10 +9,10 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
-    if params.key? :ratings
+    if params[:ratings].nil?
       session[:ratings] = params[:ratings]
     end
-    if params.key? :sort
+    if params[:sort].nil?
       session[:sort] = params[:sort]
     end
     

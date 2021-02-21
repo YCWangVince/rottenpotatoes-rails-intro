@@ -20,13 +20,8 @@ class MoviesController < ApplicationController
     
     @ratings_to_show_hash = Hash[@ratings_to_show.collect {|x| [x, '1']}]
     
-    if session[:sort].nil?
-      @sorting = params[:sort]
-      session[:sort] = params[:sort]
-    else
-      @sorting = session[:sort]
-    end
-    
+    @sorting = params[:sort]
+   
     if @sorting.nil? 
       @movies = Movie.with_ratings(@ratings_to_show)
     else

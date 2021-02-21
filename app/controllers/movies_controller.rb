@@ -9,9 +9,7 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
-    if (params[:redirected].nil? and params[:ratings].nil? and params[:sort].nil?)
-      redirect_to movies_path({sort: session[:sort], ratings: session[:ratings]})
-    else
+    if (params[:ratings].nil? and params[:sort].nil?)
       session[:ratings] = params[:ratings] 
       session[:sort] = params[:sort]
     end

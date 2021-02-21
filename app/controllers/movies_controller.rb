@@ -10,7 +10,7 @@ class MoviesController < ApplicationController
   def index
     @all_ratings = Movie.all_ratings
     
-    if session[:sort].nil? 
+    if session.key? :sort
       @ratings_to_show = params[:ratings].nil? ? [] : params[:ratings].keys
       session[:ratings] = params[:ratings]
     else

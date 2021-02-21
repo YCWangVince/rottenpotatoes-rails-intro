@@ -13,16 +13,16 @@
   <%= submit_tag 'Refresh', id: 'ratings_submit', class: 'btn btn-primary' %>
 <% end %>
 
-<%= debug @ratings_to_show %>
+<%= debug params[:ratings] %>
 <p>
   <b>Title:</b>
-  <%= @ratings_to_show %>
+  <%= params[:ratings] %>
 </p>
 
-<%= debug @sorting %>
+<%= debug session[:ratings] %>
 <p>
   <b>Title:</b>
-  <%= @sorting.nil? %>
+  <%= session[:ratings] %>
 </p>
 
 <table class="table table-striped col-md-12" id="movies">

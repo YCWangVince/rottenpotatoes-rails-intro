@@ -9,6 +9,7 @@ class MoviesController < ApplicationController
 
   def index
     @all_ratings = Movie.all_ratings
+    
     if params[:ratings].nil?
       session[:ratings] = params[:ratings]
     end
